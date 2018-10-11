@@ -1,5 +1,7 @@
 body {
     font-size: 30px;
+    background-color: lightgrey;
+    border: 2px solid black;
 }
 
 ul {
@@ -20,7 +22,7 @@ ul li {
         line-height: 24px;
         position: relative;
         bottom: 140px;
-        left: 640px;
+        left: 600px;
 }
 
 .tabs:after {
@@ -48,37 +50,56 @@ ul li {
   }
 
 img {
-    width: 250px;
-    height: 250px;
-    float: center;
+    width: 500px;
+    height: 500px;
+    float: none;
 }
 
 .select-boxes {
     text-align: center;
-    display:inline;
-    background-color: transparent;
-    border: 1px solid transparent;
-    margin-right: 1000px;
-    
-    
+    position: relative;
+    left: 8%;
 }
 
 .select-boxes label input[type="radio"] {
     display: block;
   }
 
+.select-boxes ul > li {
+    display: inline-block;
+    margin: -120px -5px 5px;
+    padding: 0px;
+    border: 2px solid black;
+}
+
 input {
     width: 25px;
     height: 25px;
-    margin-left: 10px;
-}
-
-label {
-    display: inline;
-    text-align: center;
+    margin-left: 0px;
 }
 
 button {
     font-size: 20px;
-    width: 200px;
+    width: 1000px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left: 32%;
+    font-size: 25px;
+}
+
+.img-select {
+    margin-left: 10px;
+}
+
+p {
+    border: 2px solid black;
+    width: 80%;
+    margin-left: 20%;
+}
+
+aside {
+    border: 2px solid black;
+    width: 10%;
+    height: 50%;
+    margin-left: 0%;
 }
