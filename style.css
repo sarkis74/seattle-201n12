@@ -78,11 +78,15 @@ input {
     margin-left: 0px;
 }
 
+#vote-button {
+    margin-top: -500px;
+}
+
 button {
     font-size: 20px;
     width: 1000px;
     height: 35px;
-    margin-top: 20px;
+    margin-top: 0px;
     margin-left: 32%;
     font-size: 25px;
 }
@@ -95,11 +99,15 @@ p {
     border: 2px solid black;
     width: 80%;
     margin-left: 20%;
+    float: left;
 }
 
 aside {
     border: 2px solid black;
-    width: 10%;
-    height: 50%;
-    margin-left: 0%;
+    background-color: beige;
+    width: 300px;
+    height: 500px;
+    position: relative;
+    top: -500px;
+ 
 }
