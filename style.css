@@ -50,22 +50,22 @@ ul li {
   }
 
 img {
-    width: 500px;
-    height: 500px;
-    float: none;
+    width: 400px;
+    height: 400px;
+    float: left;
 }
 
-.select-boxes {
+#select-boxes {
     text-align: center;
     position: relative;
     left: 8%;
 }
 
-.select-boxes label input[type="radio"] {
+#select-boxes label input[type="radio"] {
     display: block;
   }
 
-.select-boxes ul > li {
+#select-boxes ul > li {
     display: inline-block;
     margin: -120px -5px 5px;
     padding: 0px;
@@ -97,16 +97,27 @@ button {
 
 p {
     border: 2px solid black;
-    width: 80%;
-    margin-left: 20%;
-    float: left;
+    width: 65%;
+    height: 20%;
+    float: none;
+    margin-top: -800px;
+    margin-left: 500px;
+    font-size: 50px;
+    color: rgb(133, 36, 36);
+    background-color: rgb(80, 151, 151);
+}
+
+#myChart {
+    position: relative;
+    bottom: -100px;
+    left: 0px;
 }
 
 aside {
-    border: 2px solid black;
+    border: none;
     background-color: beige;
-    width: 300px;
-    height: 500px;
+    width: 400px;
+    height: 800px;
     position: relative;
     top: -500px;
  

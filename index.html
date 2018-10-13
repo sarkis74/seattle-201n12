@@ -6,11 +6,11 @@
     <title>Bus Mall</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <script src="main.js"></script>
+    
 </head>
 <body>
     <h1>
-        Title
+        BusMall
     </h1>
     <nav>
         <ul class="tabs">
@@ -20,19 +20,18 @@
             <li><a href="">Contacts</a></li>
         </ul>
     </nav>
-    <div class="select-boxes">
+    <section id="select-boxes" name="bus-mall products">
         <ul>
-            <li><img src="img/bag.jpg"><div class="img-select"><input type="radio" id="image-a"><label for="select-a">Select</label></div></li>
-            <li><img src="img/banana.jpg"><div class="img-select"><input type="radio" id="image-b"><label for="select-b">Select</label></div></li>
-            <li><img src="img/bathroom.jpg"><div class="img-select"><input type="radio" id="image-c"><label for="select-c">Select</label></div></li>
+            <li><img src="img/bag.jpg" id="left"><h2 id="nameA">droid bag</h2><div class="img-select"></div></li>
+            <li><img src="img/banana.jpg" id="center"><h2 id="nameB">banana cutter</h2><div class="img-select"></div></li>
+            <li><img src="img/bathroom.jpg" id="right"><h2 id="nameC">ipad stand</h2><div class="img-select"></div></li>
         </ul>
-    </div>
-    <aside>Results</aside>
-    <div id="vote-button"> 
-        <button type="vote">Vote!</button> 
-    </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum laoreet fringilla. Vivamus lacinia neque dui, vitae facilisis augue facilisis vitae. Maecenas risus purus, imperdiet nec pharetra et, faucibus ut velit. Vestibulum eleifend orci sed metus aliquet, quis iaculis lectus rutrum. Duis mattis suscipit justo in dapibus. Vestibulum bibendum ligula vel lacus auctor, scelerisque placerat quam viverra. Cras pretium rhoncus nulla vitae semper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla pulvinar hendrerit magna in efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur efficitur nulla metus, a tristique augue mollis non. Mauris condimentum nulla eu suscipit pretium. Duis quis neque luctus, feugiat neque eget, lacinia ante. Sed lorem turpis, varius ornare suscipit ut, ornare in tellus. Pellentesque at urna fermentum, porttitor erat blandit, tincidunt dui.</p>
-
-    <footer></footer>
+    </section>
+    <aside id="results"></aside>
+   
+    <p>Click on an image to vote for your favorite BusMall product!!</p>
+    <canvas id="myChart" style="border:1px solid black" width="100px" height="50px"></canvas>
 </body>
+<script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </html>
