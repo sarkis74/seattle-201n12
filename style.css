@@ -97,26 +97,30 @@ img {
 p {
     border: 2px solid black;
     width: 65%;
-    height: 20%;
+    height: 80%;
     float: none;
-    margin-top: -800px;
+    margin-top: -550px;
     margin-left: 500px;
     font-size: 50px;
     color: rgb(133, 36, 36);
     background-color: rgb(80, 151, 151);
 }
 
-#myChart {
-    position: relative;
-    bottom: -100px;
+#myCanvas {
+    position: absolute;
+    z-index: 9;
+    top: 1800px;
     left: 0px;
+    -webkit-user-drag: element;
+
 }
 
 aside {
+    font-size: 25px;
     border: none;
     background-color: beige;
     width: 450px;
-    height: 900px;
+    height: 600px;
     position: relative;
     top: -500px;
  

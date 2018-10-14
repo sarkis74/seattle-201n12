@@ -57,10 +57,14 @@ var prodClickHandler = function(event) {
 clickCounter++;
 //25 tries max
 if(clickCounter === 25) {
+    myChart.width = 200;
+    myChart.height = 60;
+    console.log(myChart);
     renderChart();
     imageSection.removeEventListener('click', prodClickHandler);
+    document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
-        document.getElementById("results").innerHTML += 'Results:<br> ' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
+        document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
     }
 }
 
@@ -136,6 +140,7 @@ var shuffleColors = function() {
 function refresh() {
     location.reload();
 }
+
 //===================================================
 //Chart JS
 //===================================================
@@ -203,21 +208,18 @@ var chartData = {
     ],
     borderWidth: 1
     }]
-}; console.log(chartData.datasets[0].backgroundColor);
+}; 
+//change bar color randomly every 10 seconds
+// var myVar = setInterval(renderChart, 10000);
 
-var myVar = setInterval(renderChart, 10000);
+// var shuffle = function() {
+//     for(var i in colorChange) {
+//     var rando = Math.floor(Math.random() * colorChange.length);
+//     chartData.datasets[0].backgroundColor.splice(rando, 1);
+//     chartData.datasets[0].backgroundColor.push(colorChange[rando]);
+//     }
+// } 
 
-var shuffle = function() {
-    for(var i in colorChange) {
-    var rando = Math.floor(Math.random() * colorChange.length);
-    chartData.datasets[0].backgroundColor.splice(rando, 1);
-    //rando = Math.floor(Math.random() * colorChange.length);
-    chartData.datasets[0].backgroundColor.push(colorChange[rando]);
-    //renderChart();
-    }
-} 
-shuffle();  
-console.log(chartData.datasets[0].backgroundColor);
 var chartOptions = {
     scales: {
         yAxes: [{
@@ -234,6 +236,6 @@ var barChart = {
     data: chartData,
     options: chartOptions,
 }
-    var myChart = new Chart(ctx, barChart);
+var myChart = new Chart(ctx, barChart);
 }
 
