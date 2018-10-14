@@ -61,34 +61,11 @@ img {
     left: 8%;
 }
 
-#select-boxes label input[type="radio"] {
-    display: block;
-  }
-
 #select-boxes ul > li {
     display: inline-block;
     margin: -120px -5px 5px;
     padding: 0px;
     border: 2px solid black;
-}
-
-input {
-    width: 25px;
-    height: 25px;
-    margin-left: 0px;
-}
-
-#vote-button {
-    margin-top: -500px;
-}
-
-button {
-    font-size: 20px;
-    width: 1000px;
-    height: 35px;
-    margin-top: 0px;
-    margin-left: 32%;
-    font-size: 25px;
 }
 
 .img-select {
@@ -116,8 +93,8 @@ p {
 aside {
     border: none;
     background-color: beige;
-    width: 400px;
-    height: 800px;
+    width: 450px;
+    height: 900px;
     position: relative;
     top: -500px;
  

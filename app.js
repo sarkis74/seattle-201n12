@@ -14,7 +14,7 @@ var ctx = document.getElementById("myChart").getContext('2d');
 
 //====================================================
 var allProdImgs = [];
-var currentImgs = [];
+var pastImgs = [];
 
 //constructor for building product images on page
 var ProdImg = function(src, name) {
@@ -39,25 +39,28 @@ var prodClickHandler = function(event) {
             var randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
             var randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
             var randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
-        } while(randomNumberLeft === allProdImgs[randomNumberLeft] || randomNumberLeft === allProdImgs[randomNumberCenter] || randomNumberLeft === allProdImgs[randomNumberRight]  || randomNumberCenter === allProdImgs[randomNumberCenter] || randomNumberCenter === allProdImgs[randomNumberLeft] || randomNumberCenter === allProdImgs[randomNumberRight] || randomNumberRight === allProdImgs[randomNumberRight] || randomNumberRight === allProdImgs[randomNumberLeft] || randomNumberLeft === allProdImgs[randomNumberCenter]);
-      
-    if(event.target.id === 'left') {
-        allProdImgs[randomNumberLeft].likes++; 
-        
-    } else if(event.target.id === 'center') {
-        allProdImgs[randomNumberCenter].likes++;
+          
+            pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
+            
+        } while(randomNumberLeft === pastImgs[randomNumberLeft] || randomNumberLeft === pastImgs[randomNumberCenter] || randomNumberLeft === pastImgs[randomNumberRight]  || randomNumberCenter === pastImgs[randomNumberCenter] || randomNumberCenter === pastImgs[randomNumberLeft] || randomNumberCenter === pastImgs[randomNumberRight] || randomNumberRight === pastImgs[randomNumberRight] || randomNumberRight === pastImgs[randomNumberLeft] || randomNumberLeft === pastImgs[randomNumberCenter]);
 
-    } else {
-    allProdImgs[randomNumberRight].likes++;
+        if(event.target.id === 'left') {
+            allProdImgs[randomNumberLeft].likes++;
+            
+        } else if(event.target.id === 'center') {
+            allProdImgs[randomNumberCenter].likes++;
+
+        } else {
+        allProdImgs[randomNumberRight].likes++;
     }
 }
 clickCounter++;
-
+//25 tries max
 if(clickCounter === 25) {
     renderChart();
     imageSection.removeEventListener('click', prodClickHandler);
     for(var i = 0; i < allProdImgs.length; i++) {
-        document.getElementById("results").innerHTML += '<br>Results: ' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
+        document.getElementById("results").innerHTML += 'Results:<br> ' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
     }
 }
 
@@ -75,26 +78,31 @@ document.getElementById("nameB").textContent = allProdImgs[randomNumberCenter].n
 document.getElementById("right").src = allProdImgs[randomNumberRight].src;
 document.getElementById("nameC").textContent = allProdImgs[randomNumberRight].name;
 
-if(document.getElementById("left").src === document.getElementById("center").src || document.getElementById("left").src === document.getElementById("right").src || document.getElementById("center").src === document.getElementById("right").src) {
-    
-    document.getElementById("left").src = allProdImgs[0].src;
-    document.getElementById("center").src = allProdImgs[1].src;
-    document.getElementById("right").src = allProdImgs[2].src;
-}
+//to avoid duplicate images displayed
+var i = 0;
+    if(randomNumberLeft === randomNumberCenter || randomNumberLeft === randomNumberRight || randomNumberCenter === randomNumberRight) {
+        i++;
+        document.getElementById("left").src = allProdImgs[i].src;
+        document.getElementById("nameA").textContent = allProdImgs[i].name;
+        i++;
+        document.getElementById("center").src = allProdImgs[i].src;
+        document.getElementById("nameB").textContent = allProdImgs[i].name;
+        i++;
+        document.getElementById("right").src = allProdImgs[i].src;
+        document.getElementById("nameC").textContent = allProdImgs[i].name;
 
-//event.target.src = 
-event.target.src = allProdImgs[randomNumberLeft].src;
-event.target.src = allProdImgs[randomNumberCenter].src;
-event.target.src = allProdImgs[randomNumberRight].src;
-
+    }
 }
 
 imageSection.addEventListener('click', prodClickHandler);
 
-
+//this fills the images array
 new ProdImg('./img/bag.jpg', 'droid bag');
 new ProdImg('./img/banana.jpg', 'banana cutter');
 new ProdImg(' ./img/bathroom.jpg', 'ipad stand');
+new ProdImg(' ./img/boots.jpg', 'rain boots');
+new ProdImg(' ./img/breakfast.jpg', 'coffee-maker/toaster');
+new ProdImg(' ./img/bubblegum.jpg', 'meatball gum');
 new ProdImg('./img/chair.jpg', 'chair');
 new ProdImg('./img/cthulhu.jpg', 'cthulhu figure');
 new ProdImg('./img/dog-duck.jpg', 'dog duck bill');
@@ -110,7 +118,6 @@ new ProdImg('./img/usb.gif', 'tentacle usb');
 new ProdImg('./img/water-can.jpg', 'water can');
 new ProdImg('./img/wine-glass.jpg', 'wine glass');
 
-
 //===================================================
 //Chart JS
 //===================================================
@@ -123,8 +130,7 @@ var colors = [];
         prodNames.push(allProdImgs[i].name);
         prodLikes.push(allProdImgs[i].likes);
         colors.push('red');
-
-    }console.log(prodLikes);
+    }
 
 var chartData = {
     labels: prodNames,
