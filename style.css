@@ -15,7 +15,7 @@ ul li {
     display: inline;
 }
 
-.tabs {
+#tabs {
         text-align: center;
         list-style: none;
         margin: 0;
@@ -25,7 +25,7 @@ ul li {
         left: 600px;
 }
 
-.tabs:after {
+#tabs:after {
     position: absolute;
     content: "";
     width: 100%;
@@ -34,7 +34,7 @@ ul li {
     z-index: 1;
   }
 
-.tabs li {
+#tabs li {
     margin: 0 -5px;
     padding: 25px;
     border: 1px solid #AAA;
@@ -44,10 +44,32 @@ ul li {
     border-top-right-radius: 6px;
   }
 
-.tabs li.selected {
+#tabs li.selected {
     background: #FFF;
     color: #000;
   }
+
+  #shuffle {
+      background-color: red;
+      color: #ECECEC;
+      font-size: 20px;
+      width: 200px;
+      height: 100px;
+      position: relative;
+      bottom: 220px;
+      left: 250px;
+  }
+
+  #reset {
+    background-color:black;
+    color: #ECECEC;
+    font-size: 20px;
+    width: 200px;
+    height: 100px;
+    position: relative;
+    bottom: 120px;
+    left: 40px;
+}
 
 img {
     width: 400px;

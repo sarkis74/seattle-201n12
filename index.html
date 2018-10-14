@@ -8,18 +8,20 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     
 </head>
-<body>
+<body id="background">
     <h1>
         BusMall
     </h1>
     <nav>
-        <ul class="tabs">
+        <ul id="tabs">
             <li><a href="">Home</a></li>
             <li><a href="">Products</a></li>
             <li><a href="">About</a></li>
             <li><a href="">Contacts</a></li>
         </ul>
     </nav>
+    <button id="shuffle" onclick="shuffleColors()">Shuffle Colors</button>
+    <button id="reset" onclick="refresh()">Reset</button>
     <section id="select-boxes" name="bus-mall products">
         <ul>
             <li><img src="img/bag.jpg" id="left"><h2 id="nameA">droid bag</h2><div class="img-select"></div></li>
@@ -28,8 +30,7 @@
         </ul>
     </section>
     <aside id="results"></aside>
-   
-    <p>Click on an image to vote for your favorite BusMall product!!</p>
+    <p id="text">Click on an image to vote for your favorite BusMall product!!</p>
     <canvas id="myChart" style="border:1px solid black" width="100px" height="50px"></canvas>
 </body>
 <script src="app.js"></script>

@@ -11,7 +11,7 @@ var imageSection = document.getElementById('select-boxes');
 var clickCounter = 0;
 //retrieves html element for display
 var ctx = document.getElementById("myChart").getContext('2d');
-
+var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow']
 //====================================================
 var allProdImgs = [];
 var pastImgs = [];
@@ -96,7 +96,7 @@ var i = 0;
 
 imageSection.addEventListener('click', prodClickHandler);
 
-//this fills the images array
+//this fills the images array with new objects with properties src and name
 new ProdImg('./img/bag.jpg', 'droid bag');
 new ProdImg('./img/banana.jpg', 'banana cutter');
 new ProdImg(' ./img/bathroom.jpg', 'ipad stand');
@@ -118,6 +118,24 @@ new ProdImg('./img/usb.gif', 'tentacle usb');
 new ProdImg('./img/water-can.jpg', 'water can');
 new ProdImg('./img/wine-glass.jpg', 'wine glass');
 
+var shuffleColors = function() {
+    for(var i in colorChange) {
+        var rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("tabs").style.background = colorChange[rando];
+        rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("select-boxes").style.background = colorChange[rando];
+        rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("results").style.background = colorChange[rando];
+        rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("text").style.background = colorChange[rando];
+        rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("background").style.background = colorChange[rando];
+    }
+}
+
+function refresh() {
+    location.reload();
+}
 //===================================================
 //Chart JS
 //===================================================
@@ -129,7 +147,7 @@ var colors = [];
     for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
         prodNames.push(allProdImgs[i].name);
         prodLikes.push(allProdImgs[i].likes);
-        colors.push('red');
+        //colors.push('red');
     }
 
 var chartData = {
@@ -138,49 +156,68 @@ var chartData = {
     label: '# of likes' ,
     data: prodLikes, //all array values
     backgroundColor: [
-        'rgba(255, 99, 132, 0.8)',
-        'rgba(54, 162, 235, 0.8)',
-        'rgba(255, 206, 86, 0.8)',
-        'rgba(75, 192, 192, 0.8)',
-        'rgba(153, 102, 255, 0.8)',
-        'rgba(255, 159, 64, 0.8)',
-        'rgba(255, 99, 132, 0.8)',
-        'rgba(54, 162, 235, 0.8)',
-        'rgba(255, 206, 86, 0.8)',
-        'rgba(75, 192, 192, 0.8)',
-        'rgba(153, 102, 255, 0.8)',
-        'rgba(255, 159, 64, 0.8)',
-        'rgba(255, 99, 132, 0.8)',
-        'rgba(54, 162, 235, 0.8)',
-        'rgba(255, 206, 86, 0.8)',
-        'rgba(75, 192, 192, 0.8)',
-        'rgba(153, 102, 255, 0.8)',
-        'rgba(255, 159, 64, 0.8)',
+        'red',
+        'aqua', 
+        'aquamarine', 
+        'blue', 
+        'blueviolet', 
+        'brown', 
+        'cadetblue', 
+        'chartreuse', 
+        'darkblue', 
+        'deeppink', 
+        'gold', 
+        'green', 
+        'yellow',
+        'brown', 
+        'cadetblue', 
+        'chartreuse', 
+        'darkblue', 
+        'deeppink', 
+        'gold', 
+        'green', 
+        'yellow'
     ],
     borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
+        'red',
+        'aqua', 
+        'aquamarine', 
+        'blue', 
+        'blueviolet', 
+        'brown', 
+        'cadetblue', 
+        'chartreuse', 
+        'darkblue', 
+        'deeppink', 
+        'gold', 
+        'green', 
+        'yellow',
+        'brown', 
+        'cadetblue', 
+        'chartreuse', 
+        'darkblue', 
+        'deeppink', 
+        'gold', 
+        'green', 
+        'yellow'
     ],
     borderWidth: 1
     }]
-};
+}; console.log(chartData.datasets[0].backgroundColor);
 
+var myVar = setInterval(renderChart, 10000);
+
+var shuffle = function() {
+    for(var i in colorChange) {
+    var rando = Math.floor(Math.random() * colorChange.length);
+    chartData.datasets[0].backgroundColor.splice(rando, 1);
+    //rando = Math.floor(Math.random() * colorChange.length);
+    chartData.datasets[0].backgroundColor.push(colorChange[rando]);
+    //renderChart();
+    }
+} 
+shuffle();  
+console.log(chartData.datasets[0].backgroundColor);
 var chartOptions = {
     scales: {
         yAxes: [{
@@ -199,3 +236,4 @@ var barChart = {
 }
     var myChart = new Chart(ctx, barChart);
 }
+
