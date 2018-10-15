@@ -5,7 +5,7 @@
 var ProdImgLeft = document.getElementById('left');
 var ProdImgCenter = document.getElementById('center');
 var ProdImgRight = document.getElementById('right');
-var imageSection = document.getElementById('select-boxes');
+var imageSection = document.getElementById('images-container');
 
 // counter for all of our select
 var clickCounter = 0;
@@ -55,11 +55,10 @@ var prodClickHandler = function(event) {
     }
 }
 clickCounter++;
-//25 tries max
+//25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
     myChart.width = 200;
     myChart.height = 60;
-    console.log(myChart);
     renderChart();
     imageSection.removeEventListener('click', prodClickHandler);
     document.getElementById("results").innerHTML += 'Results:';
@@ -124,22 +123,20 @@ new ProdImg('./img/wine-glass.jpg', 'wine glass');
 
 var shuffleColors = function() {
     for(var i in colorChange) {
-        var rando = Math.floor(Math.random() * colorChange.length);
-        document.getElementById("tabs").style.background = colorChange[rando];
-        rando = Math.floor(Math.random() * colorChange.length);
-        document.getElementById("select-boxes").style.background = colorChange[rando];
-        rando = Math.floor(Math.random() * colorChange.length);
-        document.getElementById("results").style.background = colorChange[rando];
         rando = Math.floor(Math.random() * colorChange.length);
         document.getElementById("text").style.background = colorChange[rando];
         rando = Math.floor(Math.random() * colorChange.length);
         document.getElementById("background").style.background = colorChange[rando];
+        var rando = Math.floor(Math.random() * colorChange.length);
+        rando = Math.floor(Math.random() * colorChange.length);
+        document.getElementById("results").style.background = colorChange[rando];
     }
 }
-
+//when reset button is pressed to refresh page
 function refresh() {
     location.reload();
 }
+
 
 //===================================================
 //Chart JS
@@ -209,16 +206,6 @@ var chartData = {
     borderWidth: 1
     }]
 }; 
-//change bar color randomly every 10 seconds
-// var myVar = setInterval(renderChart, 10000);
-
-// var shuffle = function() {
-//     for(var i in colorChange) {
-//     var rando = Math.floor(Math.random() * colorChange.length);
-//     chartData.datasets[0].backgroundColor.splice(rando, 1);
-//     chartData.datasets[0].backgroundColor.push(colorChange[rando]);
-//     }
-// } 
 
 var chartOptions = {
     scales: {
@@ -237,5 +224,6 @@ var barChart = {
     options: chartOptions,
 }
 var myChart = new Chart(ctx, barChart);
+myChart.ctx.shadowColor = "black";
+console.log(myChart);
 }
-

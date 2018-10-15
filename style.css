@@ -8,7 +8,6 @@ ul {
 	min-width: 696px;
     list-style: none;
     margin: 0;
-	/* padding-top: 20px; */
 }
 
 ul li {
@@ -77,13 +76,13 @@ img {
     float: left;
 }
 
-#select-boxes {
+#images-container {
     text-align: center;
     position: relative;
     left: 8%;
 }
 
-#select-boxes ul > li {
+#images-container ul > li {
     display: inline-block;
     margin: -120px -5px 5px;
     padding: 0px;

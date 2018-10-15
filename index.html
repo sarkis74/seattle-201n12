@@ -22,7 +22,7 @@
     </nav>
     <button id="shuffle" onclick="shuffleColors()">Shuffle Colors</button>
     <button id="reset" onclick="refresh()">Reset</button>
-    <section id="select-boxes" name="bus-mall products">
+    <section id="images-container" name="bus-mall products">
         <ul>
             <li><img src="img/bag.jpg" id="left"><h2 id="nameA">droid bag</h2><div class="img-select"></div></li>
             <li><img src="img/banana.jpg" id="center"><h2 id="nameB">banana cutter</h2><div class="img-select"></div></li>
@@ -31,10 +31,17 @@
     </section>
     <aside id="results"></aside>
     <p id="text">Click on an image to vote for your favorite BusMall product!!</p>
-<div>
-    <canvas id="myChart" draggable="true" ondragstart="drag(event)" style="border:1px solid black" width="100px" height="50px"></canvas>
+<div id="myChart-container" class="ui-widget-content" style="position: relative; height:100vh; width:80vw">
+    <canvas id="myChart" draggable="true" style="border:1px solid black" width="100px" height="50px"></canvas>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+    $( "#myChart-container" ).draggable(); //makes chart div draggable
+} );
+</script>
 <script src="app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </html>
