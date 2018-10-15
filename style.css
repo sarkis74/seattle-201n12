@@ -105,8 +105,8 @@ img {
     background-color: rgb(80, 151, 151);
 }
 
-#myChart-container {
-    cursor: grab;
+#myChart {
+    cursor: move;
 }
 
 #myChart {
