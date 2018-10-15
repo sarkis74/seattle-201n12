@@ -42,14 +42,16 @@ var prodClickHandler = function(event) {
           
             pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
             
-        } while(randomNumberLeft === pastImgs[randomNumberLeft] || randomNumberLeft === pastImgs[randomNumberCenter] || randomNumberLeft === pastImgs[randomNumberRight]  || randomNumberCenter === pastImgs[randomNumberCenter] || randomNumberCenter === pastImgs[randomNumberLeft] || randomNumberCenter === pastImgs[randomNumberRight] || randomNumberRight === pastImgs[randomNumberRight] || randomNumberRight === pastImgs[randomNumberLeft] || randomNumberLeft === pastImgs[randomNumberCenter]);
+        } while(randomNumberLeft === pastImgs[0] || randomNumberLeft === pastImgs[1] || randomNumberLeft === pastImgs[2]  || randomNumberCenter === pastImgs[0] || randomNumberCenter === pastImgs[1] || randomNumberCenter === pastImgs[2] || randomNumberRight === pastImgs[0] || randomNumberRight === pastImgs[1] || randomNumberLeft === pastImgs[2]);
 
         if(event.target.id === 'left') {
             allProdImgs[randomNumberLeft].likes++;
+            console.log(allProdImgs[randomNumberLeft].likes++);
+            console.log(pastImgs);
             
         } else if(event.target.id === 'center') {
             allProdImgs[randomNumberCenter].likes++;
-
+            console.log(pastImgs);
         } else {
         allProdImgs[randomNumberRight].likes++;
     }
@@ -227,5 +229,4 @@ var barChart = {
 }
 var myChart = new Chart(ctx, barChart);
 myChart.ctx.shadowColor = "black";
-console.log(myChart);
 }
