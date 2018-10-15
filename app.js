@@ -16,6 +16,13 @@ var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', '
 var allProdImgs = [];
 var pastImgs = [];
 
+var randomNumberLeft = 0;
+var randomNumberCenter = 1;
+var randomNumberRight = 2;
+
+console.log(allProdImgs);
+console.log(randomNumberLeft);
+
 //constructor for building product images on page
 var ProdImg = function(src, name) {
     this.likes = 0;
@@ -29,29 +36,51 @@ var ProdImg = function(src, name) {
 //prototype
 ProdImg.prototype.renderProduct = function() {
     prodImgLeft.src = this.src;
+    ProdImgCenter.src = this.src;
+    ProdImgRight.src = this.src;
 };
 
 //event listeners and handlers
 var prodClickHandler = function(event) {
-    if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
+//the page loads with preset images, this is to account for these images
+    if(event.target.id === 'left') {
+        allProdImgs[randomNumberLeft].likes++;
+        console.log(allProdImgs[randomNumberLeft]);
+    } else if(event.target.id === 'center') {
+        allProdImgs[randomNumberCenter].likes++;
+    } else {
+    allProdImgs[randomNumberRight].likes++; 
+}
 
+//all three images appeared on screen 
+allProdImgs[randomNumberLeft].appeared++;
+allProdImgs[randomNumberCenter].appeared++;
+allProdImgs[randomNumberRight].appeared++;
+
+//removes listener to initial images
+event.preventDefault();
+event.stopImmediatePropagation();
+    imageSection.removeEventListener("click", prodClickHandler);
+    document.onclick = contProdClickHandler; 
+}
+//starts listening to new images
+var contProdClickHandler = function(event) {
+    if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
+        
         do {
-            var randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
-            var randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
-            var randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
-          
+            randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
             pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
+            randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
+            pastImgs.push(randomNumberCenter);
+            randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
+            pastImgs.push(randomNumberRight);
             
         } while(randomNumberLeft === pastImgs[0] || randomNumberLeft === pastImgs[1] || randomNumberLeft === pastImgs[2]  || randomNumberCenter === pastImgs[0] || randomNumberCenter === pastImgs[1] || randomNumberCenter === pastImgs[2] || randomNumberRight === pastImgs[0] || randomNumberRight === pastImgs[1] || randomNumberLeft === pastImgs[2]);
 
         if(event.target.id === 'left') {
             allProdImgs[randomNumberLeft].likes++;
-            console.log(allProdImgs[randomNumberLeft].likes++);
-            console.log(pastImgs);
-            
         } else if(event.target.id === 'center') {
             allProdImgs[randomNumberCenter].likes++;
-            console.log(pastImgs);
         } else {
         allProdImgs[randomNumberRight].likes++;
     }
@@ -61,18 +90,13 @@ clickCounter++;
 if(clickCounter === 25) {
     myChart.width = 200;
     myChart.height = 60;
+    imageSection.removeEventListener('click', contProdClickHandler);
     renderChart();
-    imageSection.removeEventListener('click', prodClickHandler);
     document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
     }
 }
-
-//all three images appeared on screen 
-allProdImgs[randomNumberLeft].appeared++;
-allProdImgs[randomNumberCenter].appeared++;
-allProdImgs[randomNumberRight].appeared++;
 
 document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
 document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
