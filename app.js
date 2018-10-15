@@ -134,7 +134,7 @@ var shuffleColors = function() {
 }
 //when reset button is pressed to refresh page
 function refresh() {
-    document.getElementById("text").style.background = 'rgb(80, 151, 151)';
+    document.getElementById("text").style.background =  'rgb(80, 151, 151)';
     document.getElementById("background").style.background = 'lightgrey';
     document.getElementById("results").style.background = 'beige';
 }
