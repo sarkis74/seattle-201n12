@@ -93,7 +93,7 @@ img {
     margin-left: 10px;
 }
 
-p {
+#text {
     border: 2px solid black;
     width: 65%;
     height: 80%;
@@ -114,7 +114,7 @@ p {
 
 }
 
-aside {
+#results {
     font-size: 25px;
     border: none;
     background-color: beige;
