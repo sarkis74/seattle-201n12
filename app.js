@@ -7,7 +7,7 @@ var ProdImgCenter = document.getElementById('center');
 var ProdImgRight = document.getElementById('right');
 var imageSection = document.getElementById('images-container');
 
-// counter for all of our select
+// counter for all of our selected data
 var clickCounter = 0;
 //retrieves html element for display
 var ctx = document.getElementById("myChart").getContext('2d');
@@ -20,9 +20,6 @@ var randomNumberLeft = 0;
 var randomNumberCenter = 1;
 var randomNumberRight = 2;
 
-console.log(allProdImgs);
-console.log(randomNumberLeft);
-
 //constructor for building product images on page
 var ProdImg = function(src, name) {
     this.likes = 0;
@@ -32,26 +29,23 @@ var ProdImg = function(src, name) {
 
     allProdImgs.push(this);
 }
-
 //prototype
 ProdImg.prototype.renderProduct = function() {
-    prodImgLeft.src = this.src;
+    ProdImgLeft.src = this.src;
     ProdImgCenter.src = this.src;
     ProdImgRight.src = this.src;
 };
-
 //event listeners and handlers
 var prodClickHandler = function(event) {
 //the page loads with preset images, this is to account for these images
     if(event.target.id === 'left') {
         allProdImgs[randomNumberLeft].likes++;
-        console.log(allProdImgs[randomNumberLeft]);
     } else if(event.target.id === 'center') {
         allProdImgs[randomNumberCenter].likes++;
     } else {
     allProdImgs[randomNumberRight].likes++; 
 }
-
+console.log(allProdImgs[randomNumberRight].likes++);
 //all three images appeared on screen 
 allProdImgs[randomNumberLeft].appeared++;
 allProdImgs[randomNumberCenter].appeared++;
@@ -61,10 +55,11 @@ allProdImgs[randomNumberRight].appeared++;
 event.preventDefault();
 event.stopImmediatePropagation();
     imageSection.removeEventListener("click", prodClickHandler);
-    document.onclick = contProdClickHandler; 
+    document.onclick = contProdClickHandler;
+    //contProdClickHandler(); 
 }
 //starts listening to new images
-var contProdClickHandler = function(event) {
+var contProdClickHandler = function contProdClickHandler(event) {
     if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
         
         do {
@@ -79,25 +74,30 @@ var contProdClickHandler = function(event) {
 
         if(event.target.id === 'left') {
             allProdImgs[randomNumberLeft].likes++;
+            
+            console.log(allProdImgs[randomNumberLeft]);
         } else if(event.target.id === 'center') {
             allProdImgs[randomNumberCenter].likes++;
+            
         } else {
         allProdImgs[randomNumberRight].likes++;
-    }
+    
+    }console.log(allProdImgs[randomNumberRight].likes++);
 }
 clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
     myChart.width = 200;
     myChart.height = 60;
-    imageSection.removeEventListener('click', contProdClickHandler);
+    imageSection.removeEventListener('click', prodClickHandler);
+    document.onclick = "";
     renderChart();
     document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
     }
 }
-
+//posts random images on page
 document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
 document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
 
@@ -108,7 +108,7 @@ document.getElementById("right").src = allProdImgs[randomNumberRight].src;
 document.getElementById("nameC").textContent = allProdImgs[randomNumberRight].name;
 
 //to avoid duplicate images displayed
-var i = 0;
+for(var i = 0; i < allProdImgs.length - 1; i++) {
     if(randomNumberLeft === randomNumberCenter || randomNumberLeft === randomNumberRight || randomNumberCenter === randomNumberRight) {
         i++;
         document.getElementById("left").src = allProdImgs[i].src;
@@ -119,7 +119,7 @@ var i = 0;
         i++;
         document.getElementById("right").src = allProdImgs[i].src;
         document.getElementById("nameC").textContent = allProdImgs[i].name;
-
+        }
     }
 }
 
@@ -147,6 +147,7 @@ new ProdImg('./img/usb.gif', 'tentacle usb');
 new ProdImg('./img/water-can.jpg', 'water can');
 new ProdImg('./img/wine-glass.jpg', 'wine glass');
 
+//displays random colors on page
 var shuffleColors = function() {
     for(var i in colorChange) {
         rando = Math.floor(Math.random() * colorChange.length);
