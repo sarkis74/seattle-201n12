@@ -88,7 +88,7 @@ clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
     myChart.width = 200;
-    myChart.height = 60;
+    myChart.height = 80;
     imageSection.removeEventListener('click', prodClickHandler);
     document.onclick = "";
     renderChart();

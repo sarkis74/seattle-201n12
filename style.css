@@ -115,8 +115,9 @@ img {
     font-family: 'K2D', sans-serif;
 }
 
-#myChart {
-    cursor: move;
+#myChart-container {
+    background-color: rgb(179, 175, 171);
+    margin-left: 10%;
 }
 
 #myChart {
@@ -125,6 +126,7 @@ img {
     top: 80px;
     left: 0px;
     -webkit-user-drag: element;
+    cursor: move;
 }
 
 #results {
