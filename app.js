@@ -97,7 +97,7 @@ if(clickCounter === 25) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
     }
 }
-//posts random images on page
+//posts random images w/names on page
 document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
 document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
 
@@ -184,7 +184,7 @@ var colors = [];
 var chartData = {
     labels: prodNames,
     datasets: [{ //takes in many data sets
-    label: '# of likes' ,
+    label: 'number of likes' ,
     data: prodLikes, //all array values
     backgroundColor: [
         'red',
