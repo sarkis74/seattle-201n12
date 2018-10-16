@@ -126,26 +126,26 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
 imageSection.addEventListener('click', prodClickHandler);
 
 //this fills the images array with new objects with properties src and name
-new ProdImg('./img/bag.jpg', 'droid bag');
-new ProdImg('./img/banana.jpg', 'banana cutter');
-new ProdImg(' ./img/bathroom.jpg', 'ipad stand');
-new ProdImg(' ./img/boots.jpg', 'rain boots');
-new ProdImg(' ./img/breakfast.jpg', 'coffee-maker/toaster');
-new ProdImg(' ./img/bubblegum.jpg', 'meatball gum');
-new ProdImg('./img/chair.jpg', 'chair');
-new ProdImg('./img/cthulhu.jpg', 'cthulhu figure');
-new ProdImg('./img/dog-duck.jpg', 'dog duck bill');
-new ProdImg('./img/dragon.jpg', 'dragon meat');
-new ProdImg('./img/pen.jpg', 'pen');
-new ProdImg('./img/pet-sweep.jpg', 'dust boots');
-new ProdImg('./img/scissors.jpg', 'scissors');
-new ProdImg('./img/shark.jpg', 'shark sleeping bag');
-new ProdImg('./img/sweep.png', 'dust baby onesie');
-new ProdImg('./img/tauntaun.jpg', 'tauntaun sleeping bag');
-new ProdImg('./img/unicorn.jpg', 'unicorn meat');
-new ProdImg('./img/usb.gif', 'tentacle usb');
-new ProdImg('./img/water-can.jpg', 'water can');
-new ProdImg('./img/wine-glass.jpg', 'wine glass');
+new ProdImg('./images/bag.jpg', 'r2d2 droid bag');
+new ProdImg('./images/banana.jpg', 'banana shaped cutter');
+new ProdImg(' ./images/bathroom.jpg', 'ipad-stand tp-perch');
+new ProdImg(' ./images/boots.jpg', 'open-toed rain boots');
+new ProdImg(' ./images/breakfast.jpg', 'coffee-maker/toaster');
+new ProdImg(' ./images/bubblegum.jpg', 'meatball gum');
+new ProdImg('./images/chair.jpg', 'comfy chair');
+new ProdImg('./images/cthulhu.jpg', 'cthulhu figure');
+new ProdImg('./images/dog-duck.jpg', 'dog duck bill');
+new ProdImg('./images/dragon.jpg', 'dragon meat');
+new ProdImg('./images/pen.jpg', 'utensil pen');
+new ProdImg('./images/pet-sweep.jpg', 'dust boots');
+new ProdImg('./images/scissors.jpg', 'stencil scissors');
+new ProdImg('./images/shark.jpg', 'shark sleeping bag');
+new ProdImg('./images/sweep.png', 'dust baby onesie');
+new ProdImg('./images/tauntaun.jpg', 'tauntaun sleeping bag');
+new ProdImg('./images/unicorn.jpg', 'unicorn meat');
+new ProdImg('./images/usb.gif', 'tentacle usb');
+new ProdImg('./images/water-can.jpg', 'water can');
+new ProdImg('./images/wine-glass.jpg', 'fancy wine glass');
 
 //displays random colors on page
 var shuffleColors = function() {
