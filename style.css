@@ -6,6 +6,10 @@ body {
     background-color: #cccccc;
 }
 
+a {
+    color: blue;
+}
+
 h1 {
     background-color: lightgrey;
 }
@@ -79,8 +83,8 @@ img {
     width: 400px;
     height: 400px;
     float: left;
-    padding: -200px;
-    margin-left: 50px;
+    padding: 20px;
+    margin-left: 5px;
 }
 
 #images-container {
@@ -94,12 +98,12 @@ img {
 
 #images-container ul > li {
     display: inline-block;
-    margin: -120px -5px 5px;
+    margin: -120px 0px 5px;
     border: none;
 }
 
 .img-select {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 #text {

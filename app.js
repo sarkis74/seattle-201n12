@@ -14,6 +14,11 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow']
 //====================================================
 var allProdImgs = [];
+var numbersOfLikes = allProdImgs.likes;
+var randomNumberLeftArr = [];
+var randomNumberCenterArr = [];
+var randomNumberRightArr = [];
+
 var pastImgs = [];
 
 var randomNumberLeft = 0;
@@ -34,69 +39,25 @@ ProdImg.prototype.renderProduct = function() {
     ProdImgLeft.src = this.src;
     ProdImgCenter.src = this.src;
     ProdImgRight.src = this.src;
-};
-//event listeners and handlers
-var prodClickHandler = function(event) {
-//the page loads with preset images, this is to account for these images
-    if(event.target.id === 'left') {
-        allProdImgs[randomNumberLeft].likes++;
-    } else if(event.target.id === 'center') {
-        allProdImgs[randomNumberCenter].likes++;
-    } else {
-    allProdImgs[randomNumberRight].likes++; 
 }
-console.log(allProdImgs[randomNumberRight].likes++);
-//all three images appeared on screen 
-allProdImgs[randomNumberLeft].appeared++;
-allProdImgs[randomNumberCenter].appeared++;
-allProdImgs[randomNumberRight].appeared++;
 
-//removes listener to initial images
-event.preventDefault();
-event.stopImmediatePropagation();
-    imageSection.removeEventListener("click", prodClickHandler);
-    document.onclick = contProdClickHandler;
-    //contProdClickHandler(); 
-}
-//starts listening to new images
-var contProdClickHandler = function contProdClickHandler(event) {
+//listening and handling images clicked
+var prodClickHandler = function (event) {
     if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
         
         do {
             randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
             pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
+            allProdImgs[randomNumberLeft].appeared++;
             randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
             pastImgs.push(randomNumberCenter);
+            allProdImgs[randomNumberCenter].appeared++;
             randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
             pastImgs.push(randomNumberRight);
+            allProdImgs[randomNumberRight].appeared++;
             
         } while(randomNumberLeft === pastImgs[0] || randomNumberLeft === pastImgs[1] || randomNumberLeft === pastImgs[2]  || randomNumberCenter === pastImgs[0] || randomNumberCenter === pastImgs[1] || randomNumberCenter === pastImgs[2] || randomNumberRight === pastImgs[0] || randomNumberRight === pastImgs[1] || randomNumberLeft === pastImgs[2]);
 
-        if(event.target.id === 'left') {
-            allProdImgs[randomNumberLeft].likes++;
-            
-            console.log(allProdImgs[randomNumberLeft]);
-        } else if(event.target.id === 'center') {
-            allProdImgs[randomNumberCenter].likes++;
-            
-        } else {
-        allProdImgs[randomNumberRight].likes++;
-    
-    }console.log(allProdImgs[randomNumberRight].likes++);
-}
-clickCounter++;
-//25 tries max, renders chart afterwards and posts results to aside 
-if(clickCounter === 25) {
-    myChart.width = 200;
-    myChart.height = 80;
-    imageSection.removeEventListener('click', prodClickHandler);
-    document.onclick = "";
-    renderChart();
-    document.getElementById("results").innerHTML += 'Results:';
-    for(var i = 0; i < allProdImgs.length; i++) {
-        document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
-    }
-}
 //posts random images w/names on page
 document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
 document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
@@ -123,6 +84,37 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
     }
 }
 
+        if(event.target.id === 'left') {
+            randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
+            allProdImgs[randomNumberLeft].likes++;
+            console.log(randomNumberLeftArr);
+        } else if(event.target.id === 'center') {
+            randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
+            allProdImgs[randomNumberCenter].likes++;
+            console.log(randomNumberCenterArr);
+        } else {
+            randomNumberRightArr.push(allProdImgs[randomNumberRight]);
+            allProdImgs[randomNumberRight].likes++;
+            console.log(randomNumberRightArr);
+    }
+}
+clickCounter++;
+//25 tries max, renders chart afterwards and posts results to aside 
+if(clickCounter === 25) {
+    for(var i in allProdImgs) {
+        localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i]));
+    }
+    myChart.width = 200;
+    myChart.height = 80;
+    imageSection.removeEventListener('click', prodClickHandler);
+    document.onclick = "";
+    renderChart();
+    document.getElementById("results").innerHTML += 'Results:';
+    for(var i = 0; i < allProdImgs.length; i++) {
+        document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
+    }
+}
+//once any image is clicked the handler fires off
 imageSection.addEventListener('click', prodClickHandler);
 
 //this fills the images array with new objects with properties src and name
@@ -180,6 +172,8 @@ var colors = [];
         prodLikes.push(allProdImgs[i].likes);
         //colors.push('red');
     }
+
+//var numbersOfLikes = 
 
 var chartData = {
     labels: prodNames,
@@ -255,3 +249,8 @@ var barChart = {
 var myChart = new Chart(ctx, barChart);
 myChart.ctx.shadowColor = "black";
 }
+
+// var storelocalStorage = function() {
+//     localStorage.setItem()
+// }
+// storelocalStorage();
