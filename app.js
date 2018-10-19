@@ -156,7 +156,7 @@ var shuffleColors = function() {
 //when reset button is pressed to refresh page
 function refresh() {
     document.getElementById("text").style.background =  'rgb(80, 151, 151)';
-    document.getElementById("background").style.background = 'lightgrey';
+    document.getElementById("background").style.backgroundImage = 'url("images/bus.jpg")';
     document.getElementById("results").style.background = 'beige';
 }
 
@@ -168,9 +168,13 @@ var renderChart = function() {
 var prodNames = [];
 var prodLikes = [];
 var colors = [];
+var prodTotal = []; //array for final data
     
     for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
-        prodNames.push(allProdImgs[i].name);
+        // prodNames.push(allProdImgs[i].name);
+        // prodLikes.push(allProdImgs[i].likes);
+        prodTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
+        prodNames.push(prodTotal[i].name);
         prodLikes.push(allProdImgs[i].likes);
     }
 
