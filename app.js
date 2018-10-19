@@ -19,7 +19,7 @@ var randomNumberCenterArr = [];
 var randomNumberRightArr = [];
 
 var pastImgs = [];
-
+//numbers match array images to page hard-coded images
 var randomNumberLeft = 0;
 var randomNumberCenter = 1;
 var randomNumberRight = 2;
@@ -114,7 +114,7 @@ if(clickCounter === 25) {
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
         }
-    }console.log(allProdImgs);
+    }
 }
 //once any image is clicked the handler fires off
 imageSection.addEventListener('click', prodClickHandler);
