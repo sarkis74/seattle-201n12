@@ -6,7 +6,6 @@ var ProdImgLeft = document.getElementById('left');
 var ProdImgCenter = document.getElementById('center');
 var ProdImgRight = document.getElementById('right');
 var imageSection = document.getElementById('images-container');
-
 // counter for all of our selected data
 var clickCounter = 0;
 //retrieves html element for display
@@ -14,7 +13,7 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow']
 //====================================================
 var allProdImgs = [];
-var numbersOfLikes = allProdImgs.likes;
+
 var randomNumberLeftArr = [];
 var randomNumberCenterArr = [];
 var randomNumberRightArr = [];
@@ -43,30 +42,48 @@ ProdImg.prototype.renderProduct = function() {
 
 //listening and handling images clicked
 var prodClickHandler = function (event) {
-    if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
+
+//to start counting likes
+if(event.target.id === 'left') {
+    
+    randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
+    allProdImgs[randomNumberLeft].likes++;
+    
+} else if(event.target.id === 'center') {
+    randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
+    allProdImgs[randomNumberCenter].likes++;
+    
+} else {
+    randomNumberRightArr.push(allProdImgs[randomNumberRight]);
+    allProdImgs[randomNumberRight].likes++;
+    
+}
+
+allProdImgs[randomNumberLeft].appeared++;
+allProdImgs[randomNumberCenter].appeared++;
+allProdImgs[randomNumberRight].appeared++;
+
+if(event.target.id === 'left' || event.target.id === 'center' || event.target.id === 'right') {
+    do {
+        randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
+        pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
         
-        do {
-            randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
-            pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
-            allProdImgs[randomNumberLeft].appeared++;
-            randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
-            pastImgs.push(randomNumberCenter);
-            allProdImgs[randomNumberCenter].appeared++;
-            randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
-            pastImgs.push(randomNumberRight);
-            allProdImgs[randomNumberRight].appeared++;
-            
-        } while(randomNumberLeft === pastImgs[0] || randomNumberLeft === pastImgs[1] || randomNumberLeft === pastImgs[2]  || randomNumberCenter === pastImgs[0] || randomNumberCenter === pastImgs[1] || randomNumberCenter === pastImgs[2] || randomNumberRight === pastImgs[0] || randomNumberRight === pastImgs[1] || randomNumberLeft === pastImgs[2]);
+        //posts random images w/names on page
+        document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
+        document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
 
-//posts random images w/names on page
-document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
-document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
+        randomNumberCenter = Math.floor(Math.random() * allProdImgs.length)
+        pastImgs.push(randomNumberCenter);
+        document.getElementById("center").src = allProdImgs[randomNumberCenter].src;
+        document.getElementById("nameB").textContent = allProdImgs[randomNumberCenter].name;
 
-document.getElementById("center").src = allProdImgs[randomNumberCenter].src;
-document.getElementById("nameB").textContent = allProdImgs[randomNumberCenter].name;
-
-document.getElementById("right").src = allProdImgs[randomNumberRight].src;
-document.getElementById("nameC").textContent = allProdImgs[randomNumberRight].name;
+        randomNumberRight = Math.floor(Math.random() * allProdImgs.length)
+        pastImgs.push(randomNumberRight);
+        document.getElementById("right").src = allProdImgs[randomNumberRight].src;
+        document.getElementById("nameC").textContent = allProdImgs[randomNumberRight].name;
+        
+    } while(randomNumberLeft === pastImgs[0] || randomNumberLeft === pastImgs[1] || randomNumberLeft === pastImgs[2]  || randomNumberCenter === pastImgs[0] || randomNumberCenter === pastImgs[1] || randomNumberCenter === pastImgs[2] || randomNumberRight === pastImgs[0] || randomNumberRight === pastImgs[1] || randomNumberLeft === pastImgs[2]);
+}
 
 //to avoid duplicate images displayed
 for(var i = 0; i < allProdImgs.length - 1; i++) {
@@ -82,22 +99,6 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
         document.getElementById("nameC").textContent = allProdImgs[i].name;
         }
     }
-}
-
-        if(event.target.id === 'left') {
-            randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
-            allProdImgs[randomNumberLeft].likes++;
-            console.log(randomNumberLeftArr);
-        } else if(event.target.id === 'center') {
-            randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
-            allProdImgs[randomNumberCenter].likes++;
-            console.log(randomNumberCenterArr);
-        } else {
-            randomNumberRightArr.push(allProdImgs[randomNumberRight]);
-            allProdImgs[randomNumberRight].likes++;
-            console.log(randomNumberRightArr);
-    }
-}
 clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
@@ -112,7 +113,8 @@ if(clickCounter === 25) {
     document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
-    }
+        }
+    }console.log(allProdImgs);
 }
 //once any image is clicked the handler fires off
 imageSection.addEventListener('click', prodClickHandler);
@@ -170,10 +172,7 @@ var colors = [];
     for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
         prodNames.push(allProdImgs[i].name);
         prodLikes.push(allProdImgs[i].likes);
-        //colors.push('red');
     }
-
-//var numbersOfLikes = 
 
 var chartData = {
     labels: prodNames,
@@ -250,7 +249,3 @@ var myChart = new Chart(ctx, barChart);
 myChart.ctx.shadowColor = "black";
 }
 
-// var storelocalStorage = function() {
-//     localStorage.setItem()
-// }
-// storelocalStorage();
