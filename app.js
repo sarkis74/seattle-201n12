@@ -30,7 +30,9 @@ var prodNames = [];
 var prodLikes = [];
 var colors = [];
 
-var savedTotal = []; //array for saved data
+var savedNames = [];
+var savedLikes = [];
+var savedTotal = []; //array/s for displaying saved data
 //=======================================================
 //constructor for building product images on page
 var ProdImg = function(src, name) {
@@ -112,14 +114,12 @@ clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
     localStorage.setItem('allProdImgs', JSON.stringify(allProdImgs)); //goes thru array with all data and stores it in local
-    savedTotal.push(JSON.parse(window.localStorage.getItem('allProdImgs')));
     showSaved();
     myChart.width = 200;
     myChart.height = 80;
     imageSection.removeEventListener('click', prodClickHandler);
     document.onclick = "";
     renderChart();
-    renderDonut();
     document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
@@ -171,7 +171,6 @@ function refresh() {
     document.getElementById("results").style.background = 'beige';
 }
 
-
 //===================================================
 //Chart JS
 //===================================================
@@ -181,6 +180,13 @@ var showSaved = function() { //function for displaying saved data
         prodLikes.push(allProdImgs[i].likes);
     }
 }
+
+savedTotal = (JSON.parse(window.localStorage.getItem('allProdImgs')));
+    for(var i in savedTotal) { //goes over every element in the array and collects names and likes 
+        savedNames.push(savedTotal[i].name);
+        savedLikes.push(savedTotal[i].likes);
+    }
+
 
 //render function starts below
 //===================================================
@@ -260,16 +266,15 @@ var myChart = new Chart(ctx, barChart);
     
 }
 
-var renderDonut = function() {
 new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
-      labels: prodNames,
+      labels: savedNames,
       datasets: [
         {
           label: "Saved Data",
           backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
-          data: prodLikes
+          data: savedLikes
         }
       ]
     },
@@ -280,7 +285,7 @@ new Chart(document.getElementById("doughnut-chart"), {
       }
     }
 });
-}
+
 
 
 
