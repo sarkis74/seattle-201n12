@@ -270,25 +270,25 @@ var myChart = new Chart(ctx, barChart);
     
 }
 
-new Chart(document.getElementById("doughnut-chart"), {
-    type: 'pie',
-    data: {
-      labels: prodNames,
-      datasets: [
-        {
-          label: "Saved Data",
-          backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
-          data: prodLikes
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Saved Data From LocalStorage'
-      }
-    }
-});
+// new Chart(document.getElementById("doughnut-chart"), {
+//     type: 'pie',
+//     data: {
+//       labels: prodNames,
+//       datasets: [
+//         {
+//           label: "Saved Data",
+//           backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
+//           data: prodLikes
+//         }
+//       ]
+//     },
+//     options: {
+//       title: {
+//         display: true,
+//         text: 'Saved Data From LocalStorage'
+//       }
+//     }
+// });
 
 
 
