@@ -105,20 +105,9 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
 clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
-    for(var i in allProdImgs) {
-        localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i])); //goes thru array with all data and stores it in local
-        var savedTotal = [];
-        savedTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
-        
-            if(savedTotal[i].likes !== null && savedTotal.length === 20) {
-           
-                console.log(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
-                allProdImgs[i].likes+= savedTotal[i].likes; //adds up new data to old data
-                localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i])); //goes thru array with all data and stores it in local
-                savedTotal.push(allProdImgs[i])
-                //showSaved();
-        }
-    }
+    localStorage.setItem('allProdImgs', JSON.stringify(allProdImgs)); //goes thru array with all data and stores it in local
+    savedTotal.push(JSON.parse(window.localStorage.getItem('allProdImgs')));
+    showSaved();
     myChart.width = 200;
     myChart.height = 80;
     imageSection.removeEventListener('click', prodClickHandler);
@@ -184,13 +173,13 @@ var prodLikes = [];
 var colors = [];
 
 var savedTotal = []; //array for saved data
-//var showSaved = function() {
-for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
-    savedTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
-    prodNames.push(allProdImgs[i].name);
-    prodLikes.push(allProdImgs[i].likes);
+
+var showSaved = function() { //function for displaying saved data
+    for(var i in allProdImgs) { //goes over every element in the array and collects names and likes 
+        prodNames.push(allProdImgs[i].name);
+        prodLikes.push(allProdImgs[i].likes);
     }
-//}
+}
 
 //render function starts below
 //===================================================
@@ -270,25 +259,25 @@ var myChart = new Chart(ctx, barChart);
     
 }
 
-// new Chart(document.getElementById("doughnut-chart"), {
-//     type: 'pie',
-//     data: {
-//       labels: prodNames,
-//       datasets: [
-//         {
-//           label: "Saved Data",
-//           backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
-//           data: prodLikes
-//         }
-//       ]
-//     },
-//     options: {
-//       title: {
-//         display: true,
-//         text: 'Saved Data From LocalStorage'
-//       }
-//     }
-// });
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'pie',
+    data: {
+      labels: prodNames,
+      datasets: [
+        {
+          label: "Saved Data",
+          backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
+          data: prodLikes
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Saved Data From LocalStorage'
+      }
+    }
+});
 
 
 
