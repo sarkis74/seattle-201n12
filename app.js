@@ -12,8 +12,8 @@ var clickCounter = 0;
 var canvas = document.getElementById("myChart");
 var ctx = canvas.getContext('2d');
 
-var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow']
-//====================================================
+var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow'];
+
 var allProdImgs = [];
 
 var randomNumberLeftArr = [];
@@ -26,6 +26,12 @@ var randomNumberLeft = 0;
 var randomNumberCenter = 1;
 var randomNumberRight = 2;
 
+var prodNames = [];
+var prodLikes = [];
+var colors = [];
+
+var savedTotal = []; //array for saved data
+//=======================================================
 //constructor for building product images on page
 var ProdImg = function(src, name) {
     this.likes = 0;
@@ -113,6 +119,7 @@ if(clickCounter === 25) {
     imageSection.removeEventListener('click', prodClickHandler);
     document.onclick = "";
     renderChart();
+    renderDonut();
     document.getElementById("results").innerHTML += 'Results:';
     for(var i = 0; i < allProdImgs.length; i++) {
         document.getElementById("results").innerHTML += ' <br> ' + ' *' + allProdImgs[i].name + ' has ' + allProdImgs[i].likes + ' likes';
@@ -168,12 +175,6 @@ function refresh() {
 //===================================================
 //Chart JS
 //===================================================
-var prodNames = [];
-var prodLikes = [];
-var colors = [];
-
-var savedTotal = []; //array for saved data
-
 var showSaved = function() { //function for displaying saved data
     for(var i in allProdImgs) { //goes over every element in the array and collects names and likes 
         prodNames.push(allProdImgs[i].name);
@@ -259,8 +260,9 @@ var myChart = new Chart(ctx, barChart);
     
 }
 
+var renderDonut = function() {
 new Chart(document.getElementById("doughnut-chart"), {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: prodNames,
       datasets: [
@@ -278,6 +280,7 @@ new Chart(document.getElementById("doughnut-chart"), {
       }
     }
 });
+}
 
 
 
