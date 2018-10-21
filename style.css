@@ -12,6 +12,9 @@ a {
 
 h1 {
     background-color: lightgrey;
+    position: fixed;
+    left: 10px;
+    bottom: 650px;
 }
 ul {
 	min-width: 696px;
@@ -28,9 +31,9 @@ ul li {
         list-style: none;
         margin: 0;
         line-height: 24px;
-        position: relative;
-        bottom: 140px;
-        left: 600px;
+        position: absolute;
+        bottom: 700px;
+        left: 1200px;
 }
 
 #tabs:after {
@@ -64,7 +67,7 @@ ul li {
       width: 200px;
       height: 100px;
       position: relative;
-      bottom: 220px;
+      bottom: 0px;
       left: 250px;
   }
 
@@ -75,7 +78,7 @@ ul li {
     width: 200px;
     height: 100px;
     position: relative;
-    bottom: 120px;
+    bottom: -100px;
     left: 40px;
 }
 
@@ -90,7 +93,8 @@ img {
 #images-container {
     text-align: center;
     position: relative;
-    left: 20%;;
+    bottom: -200px;
+    left: 20%;
     font-family: 'K2D', sans-serif;
     background-color: lightgray;
     width: 80%;
@@ -111,7 +115,7 @@ img {
     width: 65%;
     height: 80%;
     float: none;
-    margin-top: -550px;
+    margin-top: -400px;
     margin-left: 500px;
     font-size: 45px;
     color: rgb(133, 36, 36);
@@ -126,7 +130,7 @@ img {
 
 #myChart {
     position: absolute;
-    z-index: 9;
+    z-index: none;
     top: 80px;
     left: 0px;
     -webkit-user-drag: element;
@@ -140,7 +144,15 @@ img {
     width: 450px;
     height: 600px;
     position: relative;
-    top: -500px;
+    top: -310px;
  
 }
 
+canvas {
+    background-color: beige;
+    position: relative;
+    top: 500px;
+    left: 0px;
+    z-index: 1;
+    cursor: move;
+}

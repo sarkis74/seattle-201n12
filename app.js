@@ -9,7 +9,9 @@ var imageSection = document.getElementById('images-container');
 // counter for all of our selected data
 var clickCounter = 0;
 //retrieves html element for display
-var ctx = document.getElementById("myChart").getContext('2d');
+var canvas = document.getElementById("myChart");
+var ctx = canvas.getContext('2d');
+
 var colorChange = ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow']
 //====================================================
 var allProdImgs = [];
@@ -99,11 +101,23 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
         document.getElementById("nameC").textContent = allProdImgs[i].name;
         }
     }
+
 clickCounter++;
 //25 tries max, renders chart afterwards and posts results to aside 
 if(clickCounter === 25) {
     for(var i in allProdImgs) {
-        localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i]));
+        localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i])); //goes thru array with all data and stores it in local
+        var savedTotal = [];
+        savedTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
+        
+            if(savedTotal[i].likes !== null && savedTotal.length === 20) {
+           
+                console.log(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
+                allProdImgs[i].likes+= savedTotal[i].likes; //adds up new data to old data
+                localStorage.setItem(allProdImgs[i].name, JSON.stringify(allProdImgs[i])); //goes thru array with all data and stores it in local
+                savedTotal.push(allProdImgs[i])
+                //showSaved();
+        }
     }
     myChart.width = 200;
     myChart.height = 80;
@@ -116,6 +130,7 @@ if(clickCounter === 25) {
         }
     }
 }
+
 //once any image is clicked the handler fires off
 imageSection.addEventListener('click', prodClickHandler);
 
@@ -164,19 +179,22 @@ function refresh() {
 //===================================================
 //Chart JS
 //===================================================
-var renderChart = function() {
 var prodNames = [];
 var prodLikes = [];
 var colors = [];
-var prodTotal = []; //array for final data
-    
-    for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
-        // prodNames.push(allProdImgs[i].name);
-        // prodLikes.push(allProdImgs[i].likes);
-        prodTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
-        prodNames.push(prodTotal[i].name);
-        prodLikes.push(allProdImgs[i].likes);
+
+var savedTotal = []; //array for saved data
+//var showSaved = function() {
+for(var i in allProdImgs) { //goes over every element in the array and collects names and likes and gives them color
+    savedTotal.push(JSON.parse(window.localStorage.getItem(allProdImgs[i].name)));
+    prodNames.push(allProdImgs[i].name);
+    prodLikes.push(allProdImgs[i].likes);
     }
+//}
+
+//render function starts below
+//===================================================
+var renderChart = function() {   
 
 var chartData = {
     labels: prodNames,
@@ -243,13 +261,35 @@ var chartOptions = {
     },
     responsive: true,
 }
-
 var barChart = {
     type: 'bar', //type of chart
     data: chartData,
     options: chartOptions,
 }
 var myChart = new Chart(ctx, barChart);
-myChart.ctx.shadowColor = "black";
+    
 }
+
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'pie',
+    data: {
+      labels: prodNames,
+      datasets: [
+        {
+          label: "Saved Data",
+          backgroundColor: ['red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue', 'chartreuse', 'darkblue', 'deeppink', 'gold', 'green', 'yellow','red', 'aqua', 'aquamarine', 'blue', 'blueviolet', 'brown', 'cadetblue'],
+          data: prodLikes
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Saved Data From LocalStorage'
+      }
+    }
+});
+
+
+
 
