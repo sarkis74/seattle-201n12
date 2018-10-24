@@ -56,15 +56,15 @@ var prodClickHandler = function (event) {
 //to start counting likes
 if(event.target.id === 'left') {
     
-    randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
+    //randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
     allProdImgs[randomNumberLeft].likes++;
     
 } else if(event.target.id === 'center') {
-    randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
+    //randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
     allProdImgs[randomNumberCenter].likes++;
     
 } else {
-    randomNumberRightArr.push(allProdImgs[randomNumberRight]);
+    //randomNumberRightArr.push(allProdImgs[randomNumberRight]);
     allProdImgs[randomNumberRight].likes++;
     
 }
@@ -77,8 +77,6 @@ if(event.target.id === 'left' || event.target.id === 'center' || event.target.id
     do {
         randomNumberLeft = Math.floor(Math.random() * allProdImgs.length)
         pastImgs.push(randomNumberLeft); //stores random numbers to compare new numbers to old
-        
-        //posts random images w/names on page
         document.getElementById("left").src = allProdImgs[randomNumberLeft].src;
         document.getElementById("nameA").textContent = allProdImgs[randomNumberLeft].name;
 
@@ -101,12 +99,15 @@ for(var i = 0; i < allProdImgs.length - 1; i++) {
         i++;
         document.getElementById("left").src = allProdImgs[i].src;
         document.getElementById("nameA").textContent = allProdImgs[i].name;
+        randomNumberLeftArr.push(allProdImgs[randomNumberLeft]);
         i++;
         document.getElementById("center").src = allProdImgs[i].src;
         document.getElementById("nameB").textContent = allProdImgs[i].name;
+        randomNumberCenterArr.push(allProdImgs[randomNumberCenter]);
         i++;
         document.getElementById("right").src = allProdImgs[i].src;
         document.getElementById("nameC").textContent = allProdImgs[i].name;
+        randomNumberRightArr.push(allProdImgs[randomNumberRight]);
         }
     }
 
